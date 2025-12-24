@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 
+
 posts = [
     {
         'id': 0,
@@ -44,11 +45,13 @@ posts = [
     },
 ]
 
+
 def index(request):
     # Посты должны быть в обратном порядке (последние сначала)
     reversed_posts = list(reversed(posts))
     context = {'posts': reversed_posts}
     return render(request, 'blog/index.html', context)
+
 
 def post_detail(request, id):
     # Ищем пост по id вручную
@@ -57,6 +60,7 @@ def post_detail(request, id):
             return render(request, 'blog/detail.html', {'post': post})
     # Если пост не найден
     raise Http404("Пост не найден")
+
 
 def category_posts(request, category_slug):
     context = {'category_slug': category_slug}
